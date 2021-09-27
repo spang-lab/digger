@@ -1,16 +1,28 @@
 Package: digger
-Title: What the Package Does (One Line, Title Case)
+Title: Searches, downloads and uploads files on / to datatomb.
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "First",
-           family = "Last",
+    person(given = "Jakob",
+           family = "Simeth",
            role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+           email = "jakob.simeth@ur.de"
+           comment = c(ORCID = "0000-0002-7832-2582"))
+    person(given = "Tobias",
+           family = "Schmidt",
+           role = c("aut", "cre"),
+           email = "tobias2.schmidt@ukr.de"))
+    person(given = "Marian",
+           family = "Schön",
+           role = c("aut", "cre"),
+           email = "Marian.Schoen@ukr.de"
+           ))
+Description: Simple interface to search datasets on datatomb. Allows to immediately download files and to upload new files, generating the necessary metadata.
+License: `use_mit_license()`
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
+Depends:
+    config,
+    httr,
+    rjson
