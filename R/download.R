@@ -12,14 +12,14 @@ download <- function(hash, file=NA) {
   print(paste0(pkg.env$dt_config[["server"]], "/", hash))
   response <- GET(
       url = paste0(pkg.env$dt_config[["server"]], "/", hash),
-      httr::add_headers(Authorization = digger:::get_token())
+      httr::add_headers(Authorization = diggeR:::get_token())
   )
   if( response$status_code != 200 ) {
     stop(paste0("download failed: ", httr::content(response)$error))
   }
   binary_data <- httr::content(response, "raw")
   if( is.na(file) ){
-      meta <- digger::metadata(hash)
+      meta <- diggeR::metadata(hash)
       file = meta[["name"]]
   }
   if( ! dir.exists(dirname(file))) {

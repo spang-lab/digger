@@ -8,7 +8,7 @@ search <- function(search_string, silent = FALSE) {
           "/meta/search?any=",
           search_string,
           "&properties=hash,projectname,name,description"),
-        httr::add_headers(Authorization = digger:::get_token())
+        httr::add_headers(Authorization = diggeR:::get_token())
     )
     if( response$status_code != 200 ) {
       stop(paste0("search failed: ", httr::content(response)$error))

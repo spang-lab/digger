@@ -9,7 +9,7 @@
 metadata <- function(hash) {
   meta <- GET(
           url = paste0(pkg.env$dt_config[["server"]], "/meta/", hash),
-          httr::add_headers(Authorization = digger:::get_token())
+          httr::add_headers(Authorization = diggeR:::get_token())
       )
   if( meta$status_code != 200 ) {
     stop(paste0("metadata download failed: ", httr::content(meta)$error))

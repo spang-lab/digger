@@ -38,7 +38,7 @@ set_token <- function(token) {
   # throws if invalid
   validate_token(token)
   pkg.env$token = token
-  return(datatomb_user_name())
+  return(datatomb_whoami())
 }
 #' get token. returns the token stored in pkg.env$token
 get_token <- function() {

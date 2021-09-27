@@ -3,7 +3,7 @@
 A R package for interfacing (searching, downloading, uploading) datatomb.
 
 ## Configuration
-For persistent configuration, create a file in `XDG_CONFIG_HOME/digger/config.yml` like the following
+For persistent configuration, create a file in `XDG_CONFIG_HOME/diggeR/config.yml` like the following
 ``` yaml
 default:
   token: "[your long access token]"
@@ -25,7 +25,7 @@ TBD, standard R package
 
 ### search for data sets
 ``` R
-library(digger)
+library(diggeR)
 search("dtd.model")
 ```
 returns a data frame containing names, hashes, project names and descriptions.
