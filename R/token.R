@@ -4,6 +4,7 @@
 #' @param token access token as obtained by, e.g., auth.spang-lab.de
 #'
 #' @return nothing
+#'
 validate_token <- function(token) {
   response <- httr::GET(
       url = paste0(pkg.env$dt_config[['server']], "/auth"),
@@ -17,11 +18,27 @@ validate_token <- function(token) {
     stop("invalid token")
   }
 }
+#' returns datatomb user name
+#'
+#' @return user name
+#' @export
+datatomb_whoami <- function() {
+  if( is.null(pkg.env$user) ) {
+    return("anonymous")
+  }
+  return(pkg.env$user)
+}
 #' set token. validates the token and then sets pkg.env$token
+#'
+#' @param token access token as obtained by, e.g., auth.spang-lab.de
+#'
+#' @return datatomb user name
+#' @export
 set_token <- function(token) {
   # throws if invalid
   validate_token(token)
   pkg.env$token = token
+  return(datatomb_user_name())
 }
 #' get token. returns the token stored in pkg.env$token
 get_token <- function() {
