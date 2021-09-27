@@ -15,6 +15,8 @@ Access tokens are handed out by the auth server, in our case (https://auth.spang
 Additional configs other than the "default" can be created and used by setting `R_CONFIG_ACTIVE`, see [the config package](https://cran.r-project.org/web/packages/config/vignettes/introduction.html).
 
 Anonymous usage without a token is possible, but emits warnings upon package load.
+For a single session, the token can also be set using `set_token("[your long access token]")`.
+The environment variable `ACCESS_TOKEN` overrides (if valid) any set access token in the config.
 
 ## Installation
 TBD, standard R package
