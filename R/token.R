@@ -44,3 +44,9 @@ set_token <- function(token) {
 get_token <- function() {
   return(pkg.env$token)
 }
+#' invalidate authentication for the current session
+deauth <- function() {
+  pkg.env$token <- NULL
+  pkg.env$user <- NULL
+  pkg.env$admin <- NULL
+}
