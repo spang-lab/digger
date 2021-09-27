@@ -1,4 +1,5 @@
 #' search datatomb
+#TODO docstring when signature is final
 #TODO keyword based search query
 search <- function(search_string, silent = FALSE) {
     response <- httr::GET(
