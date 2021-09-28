@@ -78,6 +78,12 @@ build_metadata <- function(filename = NA,
 #'
 #' @export
 #'
+#' @examples
+#' upload(file="datafile.h5", tags=c("testtag", "anothertesttag"), share="private")
+#'
+#' upload(file="datafile.h5", description="a test file", projectname="myproject",
+#'        tags=c("testtag", "anothertesttag"), share="private", data=list(additional="metadata"))
+#'
 upload <- function(file, ...) {
   meta <- build_metadata(file, ...)
   # TODO check file existance, compute hash
