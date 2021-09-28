@@ -18,7 +18,7 @@ search <- function(search_string, silent = FALSE) {
 
     result <- tibble()
     for( f in reslist ) {
-      result <- rbind(result, tibble(
+      result <- rbind(result, tibble::tibble(
                                   name = f$name,
                                   hash = f$hash,
                                   projectname = f$projectname,
