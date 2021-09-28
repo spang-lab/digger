@@ -9,7 +9,7 @@
 #'
 # TODO streamed access? large files potentially fill memory
 download <- function(hash, file=NA) {
-  print(paste0(pkg.env$dt_config[["server"]], "/", hash))
+  hash <- resolve_hash(hash)
   response <- GET(
       url = paste0(pkg.env$dt_config[["server"]], "/", hash),
       httr::add_headers(Authorization = diggeR:::get_token())

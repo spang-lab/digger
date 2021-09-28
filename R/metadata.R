@@ -7,6 +7,7 @@
 #' @export
 #'
 metadata <- function(hash) {
+  hash <- resolve_hash(hash)
   meta <- GET(
           url = paste0(pkg.env$dt_config[["server"]], "/meta/", hash),
           httr::add_headers(Authorization = diggeR:::get_token())
