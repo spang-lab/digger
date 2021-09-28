@@ -1,6 +1,10 @@
 # diggeR
 
-A R package for interfacing (searching, downloading, uploading) datatomb.
+A simple R package for interfacing (searching, downloading, uploading) [datatomb](https://gitlab.spang-lab.de/containers/datatomb/).
+
+Coverage of the datatomb API is (intentionally) not complete. E.g., admin commands should not be possible via this interface. Pull requests or feedback on other missing functionality are greatly appreciated.
+
+A more feature-complete datatomb frontend available on the command line is [glacier](https://gitlab.spang-lab.de/jsimeth/glacier) (besides curl 😉). glacier includes functionality to track the "ancestry" of datasets. That means datasets typically have parents and children (This information is discarded when using diggeR).
 
 ## Configuration
 For persistent configuration, create a file in `XDG_CONFIG_HOME/diggeR/config.yml` like the following
@@ -10,7 +14,7 @@ default:
   server: "https://data.spang-lab.de/api/v1"
 ```
 
-Access tokens are handed out by the auth server, in our case (https://auth.spang-lab.de).
+Access tokens are handed out by the auth server, in our case https://auth.spang-lab.de.
 
 Additional configs other than the "default" can be created and used by setting `R_CONFIG_ACTIVE`, see [the config package](https://cran.r-project.org/web/packages/config/vignettes/introduction.html).
 
