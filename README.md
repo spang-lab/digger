@@ -48,3 +48,20 @@ meta <- metadata("88b3e7e08b2dfcc486e8")
 names(meta)
 meta$projectname
 ```
+
+### upload
+``` R
+hash <- upload("test.h5", tags=c("testtag", "othertag"), description="a long test description.", share="private")
+metadata(hash)
+```
+
+### delete
+
+``` R
+delete(hash)
+```
+will ask you before actual deletion.
+
+If you want to delete without being asked, pass `quiet = TRUE`.
+
+If data sets that haven't been uploaded via diggeR should also be deleted, then pass `force=TRUE`.
