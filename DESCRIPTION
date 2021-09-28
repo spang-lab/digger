@@ -25,4 +25,5 @@ Depends:
     config,
     httr,
     rjson,
-    digest
+    digest, 
+    tibble
