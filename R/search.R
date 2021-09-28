@@ -48,7 +48,7 @@ check_and_build_date <- function(name, value) {
 #' @return key-value pair of the form key=value
 check_and_build_hash <- function(name, value) {
   if( length(value) == 1 && ! is.na(value)) {
-    if( regexp("[a-z0-9]{3,64}", value) > 0 ){
+    if( regexpr("[a-z0-9]{3,64}", value) > 0 ){
       return(paste0(name, "=", value))
     } else {
       stop(paste0("not a valid hash: ", value))
