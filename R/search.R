@@ -89,7 +89,9 @@ build_searchstring <- function(
     check_and_build_character("projectname", projectname)),
     sep="", collapse="&")))
 }
-#' search datatomb. Refer to the datatomb documentation for more details and to metadata() if more information on a specific dataset is needed.
+#' search datatomb for datasets
+#'
+#' @description Searches datatomb for datasets using keywords or free text. Refer to the datatomb documentation for more details and to metadata() if more information on a specific dataset is needed.
 #'
 #' @param global_search searches all metadata fields for partial match
 #' @param tags one tag or a vector of tags that must be attached to the dataset
