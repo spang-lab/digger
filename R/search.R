@@ -105,6 +105,10 @@ build_searchstring <- function(
 #'
 #' @return a tibble / dataframe of search results which includes the name, hash, projectname and the description of the dataset
 #'
+#' @examples
+#' search("dtd.model")
+#' search(tags=c("dtd.model", "macro"), author="mschoen")
+#'
 #' @export
 search <- function(global_search, tags=NA, name=NA, author=NA,
                    description=NA, after=NA, before=NA,
