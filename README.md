@@ -21,7 +21,7 @@ The environment variable `ACCESS_TOKEN` overrides (if valid) any set access toke
 ## Installation
 TBD, standard R package
 
-## Usage
+## Basic usage
 
 ### search for data sets
 ``` R
@@ -65,3 +65,15 @@ will ask you before actual deletion.
 If you want to delete without being asked, pass `quiet = TRUE`.
 
 If data sets that haven't been uploaded via diggeR should also be deleted, then pass `force=TRUE`.
+
+
+## Project usage
+To tie your commits to a dataset that should be used in your scripts, you can
+``` R
+ensure("file.h5", "abb5c806601182d92a68e62889fba2e7d145dc3f8f485d28a693c8e3db975cae")
+```
+(note that here, the full hash is necessary). This will check, if `file.h5` exists and has the correct checksum. If it does not exist, then it downloads it from datatomb. If it has a wrong hash, the function errors, except `replace=TRUE` is set (then the corrupt file is overwritten by the remote file).
+
+To verify that an existing file has the correct check sum, you can instead call `check("file.h5", "abb5c806601182d92a68e62889fba2e7d145dc3f8f485d28a693c8e3db975cae")`.
+
+Integrating these functions in your script will make the input to your script more predictable and excludes potential overwriting of files and alike. It will also make your scripts easily runnable via a remote machine without copying the necessary input files alongside.
