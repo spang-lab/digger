@@ -21,14 +21,21 @@ The environment variable `ACCESS_TOKEN` overrides (if valid) any set access toke
 ## Installation
 TBD, standard R package
 
-## Basic usage
+## Interactive usage
 
 ### search for data sets
 ``` R
 library(diggeR)
 search("dtd.model")
 ```
-returns a data frame containing names, hashes, project names and descriptions.
+returns a data frame with search results containing names, hashes, project names and descriptions.
+
+More fine-grained search is possible using the keywords, e.g.,
+``` R
+library(diggeR)
+search(tags=c("dtd.model", "macro"), author="mschoen")
+```
+See the docstring `?diggeR::search` for details.
 
 ### download data sets 
 ``` R
@@ -67,7 +74,7 @@ If you want to delete without being asked, pass `quiet = TRUE`.
 If data sets that haven't been uploaded via diggeR should also be deleted, then pass `force=TRUE`.
 
 
-## Project usage
+## Usage in scripts
 To tie your commits to a dataset that should be used in your scripts, you can
 ``` R
 ensure("file.h5", "abb5c806601182d92a68e62889fba2e7d145dc3f8f485d28a693c8e3db975cae")
