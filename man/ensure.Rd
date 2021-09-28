@@ -2,7 +2,7 @@
 % Please edit documentation in R/ensure.R
 \name{ensure}
 \alias{ensure}
-\title{ensures that a file is present and correct}
+\title{Ensures that a file is present and correct}
 \usage{
 ensure(filename, hash, replace = FALSE)
 }
@@ -10,7 +10,12 @@ ensure(filename, hash, replace = FALSE)
 \item{filename}{file that is expected to be here}
 
 \item{hash}{file hash (sha256sum) of the file.}
+
+\item{replace}{if set to TRUE, replace the file instead of failing in the case of file corruption}
 }
 \description{
-ensures that a file is present and correct
+If the file is not present, it will be downloaded from datatomb.
+If the file is present, it will be checked for correctness.
+If it is corrupt, this function will fail, except replace=TRUE
+is set, then the file will be overwritten with the correct version.
 }

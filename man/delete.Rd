@@ -11,11 +11,11 @@ delete(hash, quiet = FALSE, force = FALSE)
 
 \item{quiet}{if set to TRUE, don't ask before deletion}
 
-\item{force}{if set to true, allow deletion of datasets that were not uploaded using diggeR}
-}
-\value{
-nothing
+\item{force}{if set to TRUE, allow deletion of datasets that were not uploaded using diggeR}
 }
 \description{
-delete a data set remotely on datatomb
+Allows to delete remote files stored on datatomb.
+If not explicitly deactivated, the user has to confirm the deletion before the request is sent.
+By default, this function also only deletes datasets that were uploaded via diggeR to reduce
+destructive interference with other tools like glacier.
 }

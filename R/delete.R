@@ -1,10 +1,14 @@
 #' delete a data set remotely on datatomb
 #'
+#' @description Allows to delete remote files stored on datatomb.
+#' If not explicitly deactivated, the user has to confirm the deletion before the request is sent.
+#' By default, this function also only deletes datasets that were uploaded via diggeR to reduce
+#' destructive interference with other tools like glacier.
+#'
 #' @param hash hash to delete
 #' @param quiet if set to TRUE, don't ask before deletion
-#' @param force if set to true, allow deletion of datasets that were not uploaded using diggeR
+#' @param force if set to TRUE, allow deletion of datasets that were not uploaded using diggeR
 #'
-#' @return nothing
 #' @export
 delete <- function(hash, quiet = FALSE, force = FALSE) {
   if( ! quiet || ! force ) {
@@ -14,7 +18,7 @@ delete <- function(hash, quiet = FALSE, force = FALSE) {
                       "Do you really want to remotely (= ON THE SERVER) delete the data set with hash \"",
                       hash, "\" (name: \"", meta$name, "\") [Ny]"))
       if( yn != "y" && yn != "Y" && yn != "j" && yn != "J" ) {
-      stop("deletion aborted upon request")
+        stop("deletion aborted upon request")
       }
     }
     if( ! force ) {
