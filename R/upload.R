@@ -97,7 +97,7 @@ upload <- function(file, ...) {
   if( response$status_code != 200 ) {
     stop(paste0("upload failed: ", httr::content(response)$error))
   }
-  hash = rjson::fromJSON(httr::content(response))$hash
-  # TODO compare hash with file
-  return(hash)
+  remote_hash <- rjson::fromJSON(httr::content(response))$hash
+  check(file, remote_hash)
+  return(remote_hash)
 }
