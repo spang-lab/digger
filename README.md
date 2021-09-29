@@ -66,6 +66,14 @@ hash <- upload("test.h5", tags=c("testtag", "othertag"), description="a long tes
 metadata(hash)
 ```
 
+### update_metadata
+It is possible to alter metadata on the server. E.g., if a dataset should be made public, the following can be done:
+``` R
+meta <- metadata(hash)
+meta$share <- "public"
+update_metadata(hash, meta)
+```
+
 ### delete
 
 ``` R
