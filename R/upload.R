@@ -15,7 +15,7 @@
 #'
 upload <- function(file, ...) {
   meta <- build_metadata(file, ...)
-  if( file.exists(file) ) {
+  if( ! file.exists(file) ) {
     stop(paste0("file \"", file, " does not exist."))
   }
   response <- POST(
