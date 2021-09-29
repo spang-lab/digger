@@ -33,7 +33,7 @@ download <- function(hash, file=NA, check_file = TRUE) {
   )
   if( check_file ) {
     # the hash may be abbreviated (must be unique, otherwise the download would have failed):
-    full_hash <- head(search(hash=hash)$hash, 1)
+    full_hash <- resolve_id(hash)
     check(file, full_hash)
   }
   return(file)
