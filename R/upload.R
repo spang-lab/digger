@@ -1,7 +1,8 @@
 #' upload a dataset to datatomb
 #'
 #' @param file file to upload (on the file system)
-#' @param ... metadata as key-value pairs. see build_metadata
+#' @param meta metadata, if missing, the metadata is built with build_metadata from the additional args
+#' @param ... metadata as key-value pairs, only considered if meta is missing. see build_metadata
 #'
 #' @return hash of the uploaded file
 #'
@@ -13,8 +14,10 @@
 #' upload(file="datafile.h5", description="a test file", projectname="myproject",
 #'        tags=c("testtag", "anothertesttag"), share="private", data=list(additional="metadata"))
 #'
-upload <- function(file, ...) {
-  meta <- build_metadata(file, ...)
+upload <- function(file, meta, ...) {
+  if( missing(meta) ) {
+    meta <- build_metadata(file, ...)
+  }
   if( ! file.exists(file) ) {
     stop(paste0("file \"", file, " does not exist."))
   }
