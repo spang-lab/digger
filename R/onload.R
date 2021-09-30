@@ -14,7 +14,7 @@ pkg.env <- new.env()
       # fall-back to current directory
       homedir <- getwd()
     }
-    xdg_home <- paste0(Sys.getenv("HOME"), "/", ".config")
+    xdg_home <- paste0(homedir, "/", ".config")
   }
   configdir <- paste0(xdg_home, "/", pkgname)
   if( ! dir.exists(configdir) ) {
