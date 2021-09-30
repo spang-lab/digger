@@ -7,6 +7,7 @@ pkg.env <- new.env()
 #' see https://cran.r-project.org/web/packages/config/vignettes/introduction.html for details.
 #'
 .onLoad <- function(libname, pkgname) {
+  pkg.env$default_server <- "https://data.spang-lab.de/api/v1"
   xdg_home <- Sys.getenv("XDG_CONFIG_HOME")
   if( xdg_home == '' ) {
     homedir <- Sys.getenv("HOME")
@@ -27,8 +28,8 @@ pkg.env <- new.env()
     pkg.env$dt_config <- config::get(file = configfile)
   }
   if( is.null(pkg.env$dt_config[['server']]) ) {
-    warning("Server hasn't been configured. Falling back to https://data.spang-lab.de/api/v1.")
-    pkg.env$dt_config[['server']] <- "https://data.spang-lab.de/api/v1"
+    warning(paste0("Server hasn't been configured. Falling back to default \"", pkg.env$default_server, "\""))
+    pkg.env$dt_config[['server']] <- pkg.env$default_server
   }
   # override token if given as env variable
   dt_access_token = Sys.getenv("ACCESS_TOKEN")
