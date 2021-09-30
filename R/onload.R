@@ -1,6 +1,8 @@
 pkg.env <- new.env()
 
 #' loads config from file or environment variables
+#'
+#' @description
 #' executed automatically upon package load.
 #' Config file is searched in $XDG_CONFIG_HOME/diggeR/config.yml
 #' default configuration is used, if R_CONFIG_ACTIVE is set to a different value, a different configuration will be used.
