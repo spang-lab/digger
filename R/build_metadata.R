@@ -58,7 +58,7 @@ build_metadata <- function(filename = NA,
     }
     meta$description <- description
   }
-  if( ! is.null(share) ) {
+  if( is.null(share) ) {
     warning("no share given, making dataset internal.")
     share <- "internal"
   }
