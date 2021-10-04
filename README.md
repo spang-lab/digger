@@ -7,14 +7,30 @@ Coverage of the datatomb API is (intentionally) not complete. E.g., admin comman
 A more feature-complete datatomb frontend available on the command line is [glacier](https://gitlab.spang-lab.de/jsimeth/glacier) (besides curl 😉). glacier includes functionality to track the "ancestry" of datasets. That means datasets typically have parents and children (This information is discarded when using diggeR).
 
 ## Configuration
+
 For persistent configuration, create a file in `XDG_CONFIG_HOME/diggeR/config.yml` like the following
+
 ``` yaml
 default:
   token: "[your long access token]"
   server: "https://data.spang-lab.de/api/v1"
 ```
 
-Access tokens are handed out by the auth server, in our case https://auth.spang-lab.de.
+If `XDG_CONFIG_HOME` is not set, the following algorithm is used to determine the location of `diggeR/config.yml`:
+
+```R
+xdg_home <- Sys.getenv("XDG_CONFIG_HOME")
+if( xdg_home == '' ) {
+  homedir <- Sys.getenv("HOME")
+  if( homedir == '' ) {
+    # fall-back to current directory
+    homedir <- getwd()
+  }
+  xdg_home <- paste0(homedir, "/", ".config")
+}
+```
+
+Access tokens are handed out by the auth server, in our case <https://auth.spang-lab.de>.
 
 Additional configs other than the "default" can be created and used by setting `R_CONFIG_ACTIVE`, see [the config package](https://cran.r-project.org/web/packages/config/vignettes/introduction.html).
 
@@ -23,11 +39,19 @@ For a single session, the token can also be set using `set_token("[your long acc
 The environment variable `ACCESS_TOKEN` overrides (if valid) any set access token in the config.
 
 ## Installation
-TBD, standard R package
+
+1. Clone this repo
+2. Start an `R` session from the repository root folder
+3. Run following code snippet from within `R`
+   ```R
+   install.packages("devtools")
+   devtools::install()
+   ```
 
 ## Interactive usage
 
 ### search for data sets
+
 ``` R
 library(diggeR)
 search("dtd.model")
@@ -41,7 +65,8 @@ search(tags=c("dtd.model", "macro"), author="mschoen")
 ```
 See the docstring `?diggeR::search` for details.
 
-### download data sets 
+### download data sets
+
 ``` R
 file_name <- download("88b3e7e08b2dfcc486e8")
 print(file_name)
@@ -61,12 +86,14 @@ meta$projectname
 ```
 
 ### upload
+
 ``` R
 hash <- upload("test.h5", tags=c("testtag", "othertag"), description="a long test description.", share="private")
 metadata(hash)
 ```
 
 ### update_metadata
+
 It is possible to alter metadata on the server. E.g., if a dataset should be made public, the following can be done:
 ``` R
 meta <- metadata(hash)
@@ -85,8 +112,8 @@ If you want to delete without being asked, pass `quiet = TRUE`.
 
 If data sets that haven't been uploaded via diggeR should also be deleted, then pass `force=TRUE`.
 
-
 ## Usage in scripts
+
 To tie your commits to a dataset that should be used in your scripts, you can
 ``` R
 ensure("file.h5", "abb5c806601182d92a68e62889fba2e7d145dc3f8f485d28a693c8e3db975cae")
