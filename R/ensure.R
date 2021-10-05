@@ -12,15 +12,18 @@
 #' @export
 ensure <- function(filename, hash, replace=FALSE) {
   if( ! file.exists(filename) ) {
-    message("downloading file.")
+    message(paste0("downloading file \"", filename, "\"."))
     download(hash, file=filename)
   } else {
-    message("file already present, checking correctness")
+    message("file \"", filename, "\" already present, checking correctness.")
     correct <- check(filename, hash, error=FALSE)
     if( ! correct && replace ) {
+      message("file is corrupt and will be corrected.")
       download(hash, file=filename)
     } else if( ! correct ) {
       stop("file is corrupt and won't be replaced.")
+    } else {
+      message("file ok.")
     }
   }
 }
