@@ -1,6 +1,19 @@
-#' internal function to check and complete metadata.
+#' function to check and complete metadata.
+#' @description this function is usually called by upload or update_metadata, but can also be called to create a suitable metadata (list) object to modify and pass on.
+#'
 #' @param filename filename of the data file
-#' @param ... metadata fields
+#' @param name name of the dataset
+#' @param tags array of tags.
+#' @param projectname name of the project. defaults to the current directory name
+#' @param description longer descriptional text of the dataset
+#' @param parents an array of hashes that this dataset depends on.
+#' @param data any list object to be stored along with the dataset.
+#' @param share accessibility of the dataset. either "public", "internal" or "private"
+#'
+#' @return metadata list object that can be passed to upload or update_metadata etc
+#'
+#' @export
+#
 build_metadata <- function(filename = NA,
                            name = NA,
                            tags = c(),

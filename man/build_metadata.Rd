@@ -2,7 +2,7 @@
 % Please edit documentation in R/build_metadata.R
 \name{build_metadata}
 \alias{build_metadata}
-\title{internal function to check and complete metadata.}
+\title{function to check and complete metadata.}
 \usage{
 build_metadata(
   filename = NA,
@@ -18,8 +18,23 @@ build_metadata(
 \arguments{
 \item{filename}{filename of the data file}
 
-\item{...}{metadata fields}
+\item{name}{name of the dataset}
+
+\item{tags}{array of tags.}
+
+\item{projectname}{name of the project. defaults to the current directory name}
+
+\item{description}{longer descriptional text of the dataset}
+
+\item{parents}{an array of hashes that this dataset depends on.}
+
+\item{data}{any list object to be stored along with the dataset.}
+
+\item{share}{accessibility of the dataset. either "public", "internal" or "private"}
+}
+\value{
+metadata list object that can be passed to upload or update_metadata etc
 }
 \description{
-internal function to check and complete metadata.
+this function is usually called by upload or update_metadata, but can also be called to create a suitable metadata (list) object to modify and pass on.
 }

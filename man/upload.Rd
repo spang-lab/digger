@@ -4,12 +4,14 @@
 \alias{upload}
 \title{upload a dataset to datatomb}
 \usage{
-upload(file, ...)
+upload(file, meta, ...)
 }
 \arguments{
 \item{file}{file to upload (on the file system)}
 
-\item{...}{metadata as key-value pairs. see build_metadata}
+\item{meta}{metadata, if missing, the metadata is built with build_metadata from the additional args}
+
+\item{...}{metadata as key-value pairs, only considered if meta is missing. see build_metadata}
 }
 \value{
 hash of the uploaded file
