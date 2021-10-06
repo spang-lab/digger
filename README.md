@@ -13,30 +13,30 @@ For persistent configuration, create a file in `XDG_CONFIG_HOME/diggeR/config.ym
 ``` yaml
 default:
   token: "[your long access token]"
-  server: "https://data.spang-lab.de/api/v1"
-```
+    server: "https://data.spang-lab.de/api/v1"
+    ```
 
-If `XDG_CONFIG_HOME` is not set, the following algorithm is used to determine the location of `diggeR/config.yml`:
+    If `XDG_CONFIG_HOME` is not set, the following algorithm is used to determine the location of `diggeR/config.yml`:
 
-```R
-xdg_home <- Sys.getenv("XDG_CONFIG_HOME")
-if( xdg_home == '' ) {
-  homedir <- Sys.getenv("HOME")
-  if( homedir == '' ) {
-    # fall-back to current directory
-    homedir <- getwd()
-  }
-  xdg_home <- paste0(homedir, "/", ".config")
-}
-```
+    ```R
+    xdg_home <- Sys.getenv("XDG_CONFIG_HOME")
+    if( xdg_home == '' ) {
+        homedir <- Sys.getenv("HOME")
+          if( homedir == '' ) {
+                # fall-back to current directory
+                    homedir <- getwd()
+                      }
+                        xdg_home <- paste0(homedir, "/", ".config")
+    }
+    ```
 
-Access tokens are handed out by the auth server, in our case <https://auth.spang-lab.de>.
+    Access tokens are handed out by the auth server, in our case <https://auth.spang-lab.de>.
 
-Additional configs other than the "default" can be created and used by setting `R_CONFIG_ACTIVE`, see [the config package](https://cran.r-project.org/web/packages/config/vignettes/introduction.html).
+    Additional configs other than the "default" can be created and used by setting `R_CONFIG_ACTIVE`, see [the config package](https://cran.r-project.org/web/packages/config/vignettes/introduction.html).
 
-Anonymous usage without a token is possible, but emits warnings upon package load.
-For a single session, the token can also be set using `set_token("[your long access token]")`.
-The environment variable `ACCESS_TOKEN` overrides (if valid) any set access token in the config.
+    Anonymous usage without a token is possible, but emits warnings upon package load.
+    For a single session, the token can also be set using `set_token("[your long access token]")`.
+    The environment variable `ACCESS_TOKEN` overrides (if valid) any set access token in the config.
 
 ## Installation
 
@@ -44,9 +44,9 @@ The environment variable `ACCESS_TOKEN` overrides (if valid) any set access toke
 2. Start an `R` session from the repository root folder
 3. Run following code snippet from within `R`
    ```R
-   install.packages("devtools")
-   devtools::install()
-   ```
+      install.packages("devtools")
+         devtools::install()
+            ```
 
 ## Interactive usage
 
@@ -112,8 +112,9 @@ If you want to delete without being asked, pass `quiet = TRUE`.
 
 If data sets that haven't been uploaded via diggeR should also be deleted, then pass `force=TRUE`.
 
-## Usage in scripts
+## Usage in scripts and best practices
 
+### ensure file integrity and improve reproducibility
 To tie your commits to a dataset that should be used in your scripts, you can
 ``` R
 ensure("file.h5", "abb5c806601182d92a68e62889fba2e7d145dc3f8f485d28a693c8e3db975cae")
@@ -123,3 +124,21 @@ ensure("file.h5", "abb5c806601182d92a68e62889fba2e7d145dc3f8f485d28a693c8e3db975
 To verify that an existing file has the correct check sum, you can instead call `check("file.h5", "abb5c806601182d92a68e62889fba2e7d145dc3f8f485d28a693c8e3db975cae")`.
 
 Integrating these functions in your script will make the input to your script more predictable and excludes potential overwriting of files and alike. It will also make your scripts easily runnable via a remote machine without copying the necessary input files alongside.
+
+### automatic dependency resolution
+When using the metadata field `parents`, it is possible to resolve dependencies automatically. 
+
+Example: I have a script that takes some kind of learnt model and applies it to some other dataset. Now, I want to know, on what dataset the model has been learnt (or need that file for some reason), so I can do something like the following:
+
+``` R
+modelhash <- "abcdef123456789"
+modelmeta <- diggeR::metadata(modelhash)
+trainingdatahash <- modelmeta$parents[1]
+diggeR::ensure("model.h5", modelhash)
+diggeR::ensure("trainingdata.h5", trainingdatahash)
+```
+
+This requires to store the parents in the datasets when uploading to datatomb. Glacier does this automatically, in diggeR, one would have to set parents explicitly at the time of uploading.
+
+If named dependencies are needed, similar information can also be stored in the more generic `data` field.
+
