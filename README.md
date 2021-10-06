@@ -126,7 +126,7 @@ To verify that an existing file has the correct check sum, you can instead call 
 Integrating these functions in your script will make the input to your script more predictable and excludes potential overwriting of files and alike. It will also make your scripts easily runnable via a remote machine without copying the necessary input files alongside.
 
 ### automatic dependency resolution
-When using the metadata field `parents`, it is possible to resolve dependencies automatically. 
+When using the metadata field `parents`, it is possible to resolve dependencies automatically. Combining wrong input files is one of the most frequent source of errors and depending on just one file and pulling the appropriate information automatically leads to more consistent results.
 
 Example: I have a script that takes some kind of learnt model and applies it to some other dataset. Now, I want to know, on what dataset the model has been learnt (or need that file for some reason), so I can do something like the following:
 
