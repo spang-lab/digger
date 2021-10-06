@@ -78,6 +78,10 @@ build_metadata <- function(filename = NA,
   if( share != "private" && share != "public" && share != "internal") {
     stop("share can only be \"private\", \"internal\", or \"public\"")
   }
+  if( ! is.null(parents) ){
+    parents <- sapply(parents, diggeR::resolve_id)
+    meta$parents <- parents
+  }
   meta$share <- share
   meta$data <- data
   return(meta)
