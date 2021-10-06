@@ -25,6 +25,9 @@ sha256sum <- function(filename) {
 #'
 #' @export
 check <- function(filename, checksum, error=TRUE) {
+  if( is.null(checksum) || length(checksum) != 1 || nchar(checksum) != 64 ) {
+    stop("invalid hash, must provide a valid sha256sum.")
+  }
   crc <- sha256sum(filename)
   if( crc == checksum ) {
     return(TRUE)

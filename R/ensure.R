@@ -11,12 +11,15 @@
 #'
 #' @export
 ensure <- function(filename, hash, replace=FALSE) {
+  if( is.null(hash) || length(hash) != 1 || nchar(hash) != 64 ) {
+    stop("invalid hash, must provide a valid sha256sum.")
+  }
   if( ! file.exists(filename) ) {
     message(paste0("downloading file \"", filename, "\"."))
     download(hash, file=filename)
   } else {
     message("file \"", filename, "\" already present, checking correctness.")
-    correct <- check(filename, hash, error=FALSE)
+    correct <- diggeR::check(filename, hash, error=FALSE)
     if( ! correct && replace ) {
       message("file is corrupt and will be corrected.")
       download(hash, file=filename)
