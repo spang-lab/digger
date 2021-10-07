@@ -10,8 +10,9 @@
 #'
 # TODO streamed access? large files potentially fill memory
 download <- function(hash, file=NA, check_file = TRUE) {
+  
   hash <- resolve_hash(hash)
-  response <- GET(
+  response <- httr::GET(
       url = paste0(pkg.env$dt_config[["server"]], "/", hash),
       httr::add_headers(Authorization = diggeR:::get_token())
   )
@@ -32,7 +33,8 @@ download <- function(hash, file=NA, check_file = TRUE) {
       con = file
   )
   if( check_file ) {
-    # the hash may be abbreviated (must be unique, otherwise the download would have failed):
+    # the hash may be abbreviated 
+    # (must be unique, otherwise the download would have failed):
     full_hash <- resolve_id(hash)
     check(file, full_hash)
   }
