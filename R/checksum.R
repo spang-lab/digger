@@ -10,7 +10,7 @@ sha256sum <- function(filename) {
     stop(paste0("file ", filename, " does not exist."))
   }
   f <- file(filename, "rb")
-  crc <- digest(readBin(f, raw(), file.info(filename)$size), algo="sha256", serialize=FALSE)
+  crc <- digest::digest(readBin(f, raw(), file.info(filename)$size), algo="sha256", serialize=FALSE)
   close(f)
   return(crc)
 }
