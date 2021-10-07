@@ -81,8 +81,9 @@ build_metadata <- function(filename = NA,
   if( ! is.null(parents) ){
     parents <- sapply(parents, diggeR::resolve_id)
     meta$parents <- parents
+  } else {
+    meta$parents <- c()
   }
-  meta$parents <- c()
   meta$share <- share
   meta$data <- data
   return(meta)
