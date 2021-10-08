@@ -36,14 +36,19 @@ pkg.env <- new.env()
   # override token if given as env variable
   dt_access_token = Sys.getenv("ACCESS_TOKEN")
   if( dt_access_token != '' ) {
-    pkg.env$dt_config$token = tryCatch(
+    tryCatch(
       set_token(dt_access_token),
       error=function(errormsg) {
         warning(paste0(errormsg, ". Ignoring environment variable ACCESS_TOKEN."))
         set_token(pkg.env$dt_config$token)
       })
   } else {
-    set_token(pkg.env$dt_config$token)
+    tryCatch(
+      set_token(pkg.env$dt_config$token),
+      error=function(errormsg) {
+        warning(paste0(errormsg, ": authentication failed. Fix token, reload package or set_token(token) manually."))
+        set_token(pkg.env$dt_config$token)
+      })
   }
   if( is.null(pkg.env$token) ) {
     warning("No access token set. Queries may fail or only public data sets are visible.")
