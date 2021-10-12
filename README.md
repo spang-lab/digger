@@ -21,12 +21,12 @@ If `XDG_CONFIG_HOME` is not set, the following algorithm is used to determine th
 ```R
 xdg_home <- Sys.getenv("XDG_CONFIG_HOME")
 if( xdg_home == '' ) {
-    homedir <- Sys.getenv("HOME")
-      if( homedir == '' ) {
-            # fall-back to current directory
-                homedir <- getwd()
-                  }
-                    xdg_home <- paste0(homedir, "/", ".config")
+homedir <- Sys.getenv("HOME")
+if( homedir == '' ) {
+# fall-back to current directory
+homedir <- getwd()
+}
+xdg_home <- paste0(homedir, "/", ".config")
 }
 ```
 
@@ -43,10 +43,10 @@ The environment variable `ACCESS_TOKEN` overrides (if valid) any set access toke
 1. Clone this repo
 2. Start an `R` session from the repository root folder
 3. Run following code snippet from within `R`
-   ```R
-      install.packages("devtools")
-         devtools::install()
-            ```
+```R
+install.packages("devtools")
+devtools::install()
+```
 
 ## Interactive usage
 
