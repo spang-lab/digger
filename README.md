@@ -13,30 +13,30 @@ For persistent configuration, create a file in `XDG_CONFIG_HOME/diggeR/config.ym
 ``` yaml
 default:
   token: "[your long access token]"
-    server: "https://data.spang-lab.de/api/v1"
-    ```
+  server: "https://data.spang-lab.de/api/v1"
+```
 
-    If `XDG_CONFIG_HOME` is not set, the following algorithm is used to determine the location of `diggeR/config.yml`:
+If `XDG_CONFIG_HOME` is not set, the following algorithm is used to determine the location of `diggeR/config.yml`:
 
-    ```R
-    xdg_home <- Sys.getenv("XDG_CONFIG_HOME")
-    if( xdg_home == '' ) {
-        homedir <- Sys.getenv("HOME")
-          if( homedir == '' ) {
-                # fall-back to current directory
-                    homedir <- getwd()
-                      }
-                        xdg_home <- paste0(homedir, "/", ".config")
-    }
-    ```
+```R
+xdg_home <- Sys.getenv("XDG_CONFIG_HOME")
+if( xdg_home == '' ) {
+    homedir <- Sys.getenv("HOME")
+      if( homedir == '' ) {
+            # fall-back to current directory
+                homedir <- getwd()
+                  }
+                    xdg_home <- paste0(homedir, "/", ".config")
+}
+```
 
-    Access tokens are handed out by the auth server, in our case <https://auth.spang-lab.de>.
+Access tokens are handed out by the auth server, in our case <https://auth.spang-lab.de>.
 
-    Additional configs other than the "default" can be created and used by setting `R_CONFIG_ACTIVE`, see [the config package](https://cran.r-project.org/web/packages/config/vignettes/introduction.html).
+Additional configs other than the "default" can be created and used by setting `R_CONFIG_ACTIVE`, see [the config package](https://cran.r-project.org/web/packages/config/vignettes/introduction.html).
 
-    Anonymous usage without a token is possible, but emits warnings upon package load.
-    For a single session, the token can also be set using `set_token("[your long access token]")`.
-    The environment variable `ACCESS_TOKEN` overrides (if valid) any set access token in the config.
+Anonymous usage without a token is possible, but emits warnings upon package load.
+For a single session, the token can also be set using `set_token("[your long access token]")`.
+The environment variable `ACCESS_TOKEN` overrides (if valid) any set access token in the config.
 
 ## Installation
 
