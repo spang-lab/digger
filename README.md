@@ -21,12 +21,12 @@ If `XDG_CONFIG_HOME` is not set, the following algorithm is used to determine th
 ```R
 xdg_home <- Sys.getenv("XDG_CONFIG_HOME")
 if( xdg_home == '' ) {
-homedir <- Sys.getenv("HOME")
-if( homedir == '' ) {
-# fall-back to current directory
-homedir <- getwd()
-}
-xdg_home <- paste0(homedir, "/", ".config")
+  homedir <- Sys.getenv("HOME")
+  if( homedir == '' ) {
+    # fall-back to current directory
+    homedir <- getwd()
+  }
+  xdg_home <- paste0(homedir, "/", ".config")
 }
 ```
 
