@@ -18,7 +18,8 @@ resolve_id <- function(partial_hash, no_result_throws = TRUE) {
   respcontent <- httr::content(response)
   if( response$status_code != 200 ) {
     if( ! no_result_throws
-       && grepl("no hash matches", respcontent$error)
+       & ( grepl("no hash matches", respcontent$error)
+         | grepl("does not exist", respcontent$error))
        ) {
       return(NA)
     }
