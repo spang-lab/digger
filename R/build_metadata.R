@@ -39,11 +39,14 @@ build_metadata <- function(filename = NA,
     stop("name must be character")
   }
   meta$name <- name
-  if( ! is.vector(tags) ) {
-    tags <- c(tags)
-  }
+
   if( ! is.character(tags) ) {
     stop("tags must be character")
+  }
+  if( ! is.vector(tags) | length(tags) <= 1 ) {
+    # this is seemingly the only way to get a vector of tags if there is just one or none:
+    # otherwise: toJSON(c("tag")) -> "tag" but not ['tag'].
+    tags <- list(tags)
   }
   meta$tags <- tags
   if( is.na(projectname) ){
