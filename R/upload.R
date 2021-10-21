@@ -21,7 +21,11 @@ upload <- function(file, meta, ...) {
   if( ! file.exists(file) ) {
     stop(paste0("file \"", file, " does not exist."))
   }
-  httr::set_config(httr::config(http_version = 1L))
+  httpversion <- ifelse(
+    as.integer(paste0(unlist(strsplit(curl::curl_version()$version, "[.]")), sep="", collapse="")) < 7791,
+    1L,
+    2L)
+  httr::set_config(httr::config(http_version = httpversion))
   response <- httr::POST(
         url = paste0(pkg.env$dt_config[["server"]], "/upload"),
         body = list(
