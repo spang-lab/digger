@@ -142,3 +142,20 @@ This requires to store the parents in the datasets when uploading to datatomb. G
 
 If named dependencies are needed, similar information can also be stored in the more generic `data` field.
 
+### Upload only if file not already exists
+A typical workflow that documents both input and output data is the following:
+- write your analysis scripts, using `ensure` for all input data.
+- at the end of the script, upload the result using `upload`, if it does not yet exist, e.g.
+- let it run, then keep the hash that is returned from the output and add it to your script, for example with `resulthash <- "babababa"`. Then, in future runs, you may check if a) the result already exists (with `exists(resulthash)`) on the server and if the result is still the same, i.e. if you got a reproducable result.
+
+
+## Debugging and error reporting
+If you encounter errors, please open issues and attach your output. If the error is datatomb related, please start from a clean session and
+
+``` R
+library(httr)
+httr::set_config(verbose())
+library(diggeR)
+# other code that produced errors
+```
+When reporting the output, censor your authorization keys that are visible from these logs.
