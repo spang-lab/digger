@@ -21,13 +21,16 @@ upload <- function(file, meta, ...) {
   if( ! file.exists(file) ) {
     stop(paste0("file \"", file, " does not exist."))
   }
-  response <- POST(
-      url = paste0(pkg.env$dt_config[["server"]], "/upload"),
-      body = list(
-        file = upload_file(file),
-        data = rjson::toJSON(meta)),
-      httr::add_headers(Authorization = diggeR:::get_token())
-  )
+  httr::set_config(httr::config(http_version = 1L))
+  response <- httr::POST(
+        url = paste0(pkg.env$dt_config[["server"]], "/upload"),
+        body = list(
+          file = upload_file(file),
+          data = rjson::toJSON(meta)),
+        config = httr::add_headers(Authorization = diggeR:::get_token())
+    )
+  httr::reset_config() # stop using HTTP1
+
   if( response$status_code != 200 ) {
     stop(paste0("upload failed: ", httr::content(response)$error))
   }
