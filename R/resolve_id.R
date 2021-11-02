@@ -11,6 +11,12 @@
 #'
 #' @export
 resolve_id <- function(partial_hash, no_result_throws = TRUE) {
+  if( is.null(partial_hash) || is.na(partial_hash) ) {
+    if( no_result_throws ) {
+      stop("resolve_id: argument is null or na.")
+    }
+    return(NA);
+  }
   response <- GET(
           url = paste0(pkg.env$dt_config[["server"]], "/resolve/", partial_hash),
           httr::add_headers(Authorization = diggeR:::get_token())
