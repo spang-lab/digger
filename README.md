@@ -1,6 +1,6 @@
 # diggeR
 
-A simple R package for interfacing (searching, downloading, uploading) [datatomb](https://gitlab.spang-lab.de/containers/datatomb/).
+A simple R package for interfacing (searching, downloading, uploading) [datatomb](https://github.com/spang-lab/datatomb/).
 
 Coverage of the datatomb API is (intentionally) not complete. E.g., admin commands should not be possible via this interface. Pull requests or feedback on other missing functionality are greatly appreciated.
 
@@ -30,7 +30,7 @@ if( xdg_home == '' ) {
 }
 ```
 
-Access tokens are handed out by the auth server, in our case <https://auth.spang-lab.de>.
+Access tokens are handed out by the auth server, in our case <https://auth.spang-lab.de>, but datatomb can also be configured to use password login, see the documentation there.
 
 Additional configs other than the "default" can be created and used by setting `R_CONFIG_ACTIVE`, see [the config package](https://cran.r-project.org/web/packages/config/vignettes/introduction.html).
 
@@ -76,6 +76,13 @@ The filename will be that from the data set. If the file should be stored elsewh
 file_name <- download("88b3e7e08b2dfcc486e8", file="this_dataset.h5")
 print(file_name)
 ```
+### ensure the integrity of data sets
+
+To ensure the integrity of the files and to document which datasets were used in an analysis, one can
+``` R
+ensure("filename.csv", "88b3e7e08b2dfcc486e8", replace=TRUE)
+```
+This tests if the file `filename` has this explicit hash. If it has not and `replace=TRUE`, the file will be overwritten with the downloaded and correct copy. If `replace=FALSE`, an error will be thrown. 
 
 ### metadata
 
